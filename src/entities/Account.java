@@ -1,3 +1,5 @@
+import utils.Utils;
+
 public class Account {
 
     private static int countAccount = 0;
@@ -11,6 +13,7 @@ public class Account {
         this.accountNumber = accountNumber;
         this.pessoa = pessoa;
         this.balance = balance;
+        countAccount += 1;
     }
 
 
@@ -51,6 +54,12 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Account [accountNumber=" + accountNumber + ", pessoa=" + pessoa + ", balance=" + Utils.doubleToString(balance) + "]";
     }
 
     
