@@ -65,8 +65,13 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account [accountNumber="  + accountNumber + ", pessoa=" + pessoa + ", balance=" + Utils.doubleToString(balance) + "]";
+        return "Account [\n" + 
+               "   accountNumber=" + accountNumber + ",\n" + 
+               "   pessoa=" + pessoa + ",\n" + 
+               "   balance=" + Utils.doubleToString(balance) + "\n" + 
+               "]";
     }
+    
 
 
     public void deposit(double value) {

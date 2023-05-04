@@ -211,12 +211,27 @@ public static void listAccount() {
 
 }
 
+private static void availableToCredit2() {
+    for (Account account : accounts) {
+        if(account.getBalance() > 850) {
+                System.out.println("This value is available " + account.getBalance() * 3);
+    
+        }
+            }
+
+
+}
+
+
+
 public static void availableToCredit(double amount) {
     
+
     if(accounts.size() > 0) {
         for (Account account2 : accounts) {
-            if(account2.getBalance() > 850) {
-                System.out.println("This value is available" + account2.getBalance() * 3);
+            
+            if(account2.getBalance() > account2.getBalance() - amount) {
+              
 
                account2.setBalance(account2.getBalance() + amount);
                               
@@ -237,14 +252,19 @@ public static void  credit() {
     for (Account account : accounts) {
         if(account.getAccountNumber() == accountNumber) {
 
-            System.out.println("Enter the amount to credit");
-            double amount = sc.nextDouble();
-            availableToCredit(amount);
+            if(account.getBalance() > 850) {
+                availableToCredit2();
+                System.out.println("Enter the amount to credit");
+                double amount = sc.nextDouble();
+                availableToCredit(amount);
+            }else {
+            System.out.println("sorry you dont have enough money");
+            }
+
+          
 
             ;
         
-        }else {
-            System.out.println("its not avalaible");
         }
 
 
