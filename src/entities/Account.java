@@ -62,6 +62,15 @@ public class Account {
         return "Account [accountNumber=" + accountNumber + ", pessoa=" + pessoa + ", balance=" + Utils.doubleToString(balance) + "]";
     }
 
+
+    public void deposit(double value) {
+        if(value > 0) {
+            setBalance(value);
+        }
+
+    }
+    
+
     
 
     
