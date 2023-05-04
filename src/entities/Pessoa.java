@@ -1,20 +1,24 @@
+import java.sql.Date;
+
 public class Pessoa {
 
     private static int count = 1;
+    private int numeroPessoa;
     private String nome;
     private String cpf;
     private String email;
+    private Date accountCreationDate;
 
     
-    public Pessoa() {
 
-    }
 
 
     public Pessoa(String nome, String cpf, String email) {
+        this.numeroPessoa = Pessoa.count;
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+        this.accountCreationDate = new Date(System.currentTimeMillis());
         count += 1;
     }
 
