@@ -2,9 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.sound.midi.Soundbank;
+
 public class AgencyBank {
     static Scanner sc = new Scanner(System.in);
     static List<Account> accounts = new ArrayList<>();
+    private static Account account;
 
     public static void main(String[] args) {
         
@@ -22,9 +25,12 @@ public class AgencyBank {
         System.out.println("2. Deposit");
         System.out.println("3. Withdraw");
         System.out.println("4. Transfer");
+        
         System.out.println("5. Check Balance");
         System.out.println("6. listAccount");
-        System.out.println("7. Exit");
+        System.out.println("7. Credit");
+        System.out.println("8. Debit");
+        System.out.println("9: Exit");
 
 
         int operation  = sc.nextInt();
@@ -48,7 +54,11 @@ public class AgencyBank {
             break;
             case 6:
             listAccount();
-            case  7:
+            case 7:
+            credit();
+            case 8:
+            debit();
+            case  9:
             System.out.println("Thank you for using our service");
             System.exit(0);
 
@@ -155,7 +165,7 @@ public static void transfer() {
         Account account = findAccount(destinationAccountNumber);
 
         if(account != null) {
-            account.transfer(amount, account2);
+            account2.transfer(amount, account);
         }
     
     }else {
@@ -198,6 +208,56 @@ public static void listAccount() {
     operation();
 
 
+
+}
+
+public static void availableToCredit(double amount) {
+    
+    if(accounts.size() > 0) {
+        for (Account account2 : accounts) {
+            if(account2.getBalance() > 850) {
+                System.out.println("This value is available" + account2.getBalance() * 3);
+
+               account2.setBalance(account2.getBalance() + amount);
+                              
+            }else {
+                System.out.println("you dont have enough money for the credit");
+            }
+        }
+    }
+
+}
+
+
+
+public static void  credit() {
+    System.out.println("Enter the account number");
+    int accountNumber = sc.nextInt();
+
+    for (Account account : accounts) {
+        if(account.getAccountNumber() == accountNumber) {
+
+            System.out.println("Enter the amount to credit");
+            double amount = sc.nextDouble();
+            availableToCredit(amount);
+
+            ;
+        
+        }else {
+            System.out.println("its not avalaible");
+        }
+
+
+    }
+
+    operation();
+    
+
+ 
+   
+}
+
+public static void debit() {
 
 }
 
