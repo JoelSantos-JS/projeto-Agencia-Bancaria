@@ -3,11 +3,14 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.sound.midi.Soundbank;
+import javax.swing.JOptionPane;
 
 public class AgencyBank {
-    static Scanner sc = new Scanner(System.in);
+    // static Scanner sc = new Scanner(System.in);
     static List<Account> accounts = new ArrayList<>();
     private static Account account;
+
+    private Pessoa pessoa;
 
     public static void main(String[] args) {
         
@@ -17,24 +20,23 @@ public class AgencyBank {
 
 
     public static void operation() {
-        System.out.println("........................................................");
-        System.out.println("................... Welcome to Agency Bank...............");
-        System.out.println("********* Select your option *********");
-        System.out.println("........................................................");
-        System.out.println("1. Create Account");
-        System.out.println("2. Deposit");
-        System.out.println("3. Withdraw");
-        System.out.println("4. Transfer");
+       
+        int operation = Integer.parseInt(JOptionPane.showInputDialog("--- Select an option ---\n"+
+       "1. Create Account"+
+        "2. Deposit"+
+        "3. Withdraw"+
+        "4. Transfer"+
         
-        System.out.println("5. Check Balance");
-        System.out.println("6. listAccount");
-        System.out.println("7. Credit");
-        System.out.println("8. Debit");
-        System.out.println("9: Exit");
+        "5. Check Balance"+
+        "6. listAccount"+
+        "7. Credit"+
+        "8. Debit"+
+        "9: Exit"
+        
+        ));
 
-
-        int operation  = sc.nextInt();
-
+     
+        
         switch(operation) {
             
             case 1: 
@@ -59,12 +61,14 @@ public class AgencyBank {
             case 8:
             debit();
             case  9:
-            System.out.println("Thank you for using our service");
+            JOptionPane.showMessageDialog(null, "Thank you for using our service");
+            System.out.println();
             System.exit(0);
 
 
             default:
-            System.out.println("Invalid option");
+            JOptionPane.showMessageDialog(null, "Invalid option");
+            
             operation();
         
         }
@@ -74,21 +78,24 @@ public class AgencyBank {
     }
     	
     public static void createAcount() {
-        System.out.println("Enter your name");
+        Pessoa pessoa = new Pessoa(null, null, null);
 
-        String name = sc.next();
+       pessoa.setNome( JOptionPane.showInputDialog(null, "Enter your name"));
+        
+        pessoa.setCpf(JOptionPane.showInputDialog(null, "Enter your cpf"));
 
-        System.out.println("Enter your cpf");
-        String cpf = sc.next();
-        System.out.println("Enter your Email");
-        String email = sc.next();
+        pessoa.setEmail(JOptionPane.showInputDialog(null, "Enter your email"));
+      
 
-        Pessoa pessoa = new Pessoa(name, cpf, email);
+        
+    
         Account account = new Account(pessoa);
 
         accounts.add(account);
 
-        System.out.println("Your account has been created");
+        JOptionPane.showMessageDialog(null, "Your account has been created");
+
+        
 
         operation();
 
@@ -112,17 +119,22 @@ public class AgencyBank {
 
 
 public static void deposit() {
- System.out.println("Enter the account number");
-    int accountNumber = sc.nextInt();
-    System.out.println("Enter the amount to deposit");
-    double amount = sc.nextDouble();
 
+    int accountNumber = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the account number"));
+
+
+
+
+    
+
+    double amount = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter the amount to deposit"));
     Account account = findAccount(accountNumber);
 
     if(account != null) {
         account.deposit(amount);
     } else {
-        System.out.println("Invalid account number");
+        JOptionPane.showMessageDialog(null, "Invalid account number");
+        
     }
 
     operation();
@@ -130,20 +142,23 @@ public static void deposit() {
 
 
 public static void withdraw() {
-    System.out.println("Enter the account number");
-    int accountNumber2 = sc.nextInt();
+    int  accountNumber = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the account number"));
 
-    System.out.println("Enter the amount to withdraw");
-    double amount = sc.nextDouble();
-    Account account = findAccount(accountNumber2);
+    
+    double amount = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter the amount to withdraw"));
+  
+    Account account = findAccount(accountNumber);
 
     if(account != null) {
-        System.out.println("how much do you want to withdraw");
-        double amount2 = sc.nextDouble();
+        
+        double amount2 = Double.parseDouble( JOptionPane.showInputDialog(null, "how much do you want to withdraw")
+        );
         account.withdraw(amount2);
-        System.out.println("withdraw successfully");
+        JOptionPane.showMessageDialog(null, "withdraw successfully");
+        
     }else {
-        System.out.println("Invalid account number");
+        JOptionPane.showMessageDialog(null, "Invalid account number");
+
     
     }
 
@@ -152,16 +167,18 @@ public static void withdraw() {
 
 
 public static void transfer() {
-    System.out.println("Enter the account number to transfer");
-    int yourAccountNumber  = sc.nextInt();
+    int yourAccountNumber = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the account number to transfer"));
+
+  
     Account account2 = findAccount(yourAccountNumber);
-    System.out.println("Enter the amount to transfer");
-    double amount = sc.nextDouble();
+
+    double amount = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter the amount to transfer"));
 
 
     if(account2 != null) {
-        System.out.println("Enter account number the destination");
-        int destinationAccountNumber  = sc.nextInt();
+        
+        
+        int destinationAccountNumber  = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the account number the destination"));
         Account account = findAccount(destinationAccountNumber);
 
         if(account != null) {
@@ -170,7 +187,8 @@ public static void transfer() {
     
     }else {
 
-        System.out.println("Invalid account number");
+        JOptionPane.showMessageDialog(null, "Invalid account number");
+
     }
 
 
@@ -179,14 +197,18 @@ public static void transfer() {
 }
 
 public static void checkBalance() {
-    System.out.println("Enter the account number");
-    int account = sc.nextInt();
+    
+
+    int account = Integer.parseInt(    JOptionPane.showInputDialog(null, "Enter account number ")
+    );
     Account account2 = findAccount(account);
 
     if(account2 != null) {
-        System.out.println("Your balance is " + account2.getBalance());
+        JOptionPane.showMessageDialog(null, "Your balance is" + account2.getBalance());
+       
     }else {
-        System.out.println("Invalid account number");
+        JOptionPane.showMessageDialog(null, "Invalid account number");
+      
     }
 
 
@@ -202,7 +224,8 @@ public static void listAccount() {
             System.out.println(account);
         }
     }else {
-        System.out.println("No accounts found");
+        JOptionPane.showMessageDialog(null, "No accounts found");
+
     }
 
     operation();
@@ -214,7 +237,9 @@ public static void listAccount() {
 private static void availableToCredit2() {
     for (Account account : accounts) {
         if(account.getBalance() > 850) {
-                System.out.println("This value is available " + account.getBalance() * 3);
+            JOptionPane.showMessageDialog(null, "This value is available" + account.getBalance() * 3);
+            
+
     
         }
             }
@@ -236,7 +261,11 @@ public static void availableToCredit(double amount) {
                account2.setBalance(account2.getBalance() + amount);
                               
             }else {
-                System.out.println("you dont have enough money for the credit");
+
+                JOptionPane.showMessageDialog(null, "you dont have enough money for the credit" );
+            
+                
+               
             }
         }
     }
@@ -246,19 +275,20 @@ public static void availableToCredit(double amount) {
 
 
 public static void  credit() {
-    System.out.println("Enter the account number");
-    int accountNumber = sc.nextInt();
+    int accountNumber = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the account number "));
 
     for (Account account : accounts) {
         if(account.getAccountNumber() == accountNumber) {
 
             if(account.getBalance() > 850) {
                 availableToCredit2();
-                System.out.println("Enter the amount to credit");
-                double amount = sc.nextDouble();
+
+               
+                double amount = Double.parseDouble(JOptionPane.showInputDialog(null, "Enter the amount to credit"));
                 availableToCredit(amount);
             }else {
-            System.out.println("sorry you dont have enough money");
+
+                JOptionPane.showMessageDialog(null, "you dont have enough money for the credit" );
             }
 
           

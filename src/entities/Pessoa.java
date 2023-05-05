@@ -11,6 +11,10 @@ public class Pessoa {
 
     
 
+    public Pessoa() {
+        
+    }
+
 
 
     public Pessoa(String nome, String cpf, String email) {
